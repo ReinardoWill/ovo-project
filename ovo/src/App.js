@@ -1,12 +1,11 @@
 import React from 'react';
-import './App.scss';
+import Home from './Scene/Home';
 
-function App() {
+
+export default function App() {
   return (
     <div className="App">
-      asd
+        <Home/>
     </div>
   );
 }
-
-export default App;
