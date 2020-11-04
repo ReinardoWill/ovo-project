@@ -1,0 +1,134 @@
+.creatorCardContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    padding: 1rem;
+
+    h2{
+        font-size: 200%;
+        line-height: 1em;
+        padding-bottom: 2rem;
+    }
+
+    .cardList{
+        display: flex;
+        justify-content: center;
+    }
+    .creatorCard{
+        display: flex;
+        position: relative;
+        flex-direction: column;
+        border-radius: 50px;
+        background: #d3eefd;
+        box-shadow:  20px -20px 60px #b3cad7, 
+             -20px 20px 60px #f3ffff;
+        width: 30rem;
+        height: 20rem;
+        padding: 1.5rem;
+        margin-left:5rem;
+        .creatorCardName{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgb(255, 255, 255);
+            z-index: 2;
+        }
+        .creatorCardAvatarBackground{
+                position: absolute;
+                bottom:35%;
+                right:0.2%;
+                background-size: cover;
+                width: 100%;
+                height: 15rem;
+                background-clip: border-box;
+                -webkit-filter: blur(2px);
+                        filter: blur(2px);
+                background-position: top center;
+                border-radius: inherit;
+                opacity: .8;
+                box-shadow: inset 0px 0px 15px 15px #d3eefd;
+
+        }
+        .creatorCardAvatarContainer{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index:2;
+            img{
+                background-size: cover;
+                background-position: top center;
+                display: block;
+                width: 8.5rem;
+                height: 8.5rem;
+                border-radius: 50%;
+                object-fit: fill;
+                padding: 0.5rem;
+                
+            }
+        }
+        
+        .creatorCardContentContainer{
+            display: flex;
+            z-index:2;
+            flex-direction: column;
+            h4{
+                font-size: 90%;
+            }
+        }
+    }
+}
+
+@media(min-width: 1500px) and (max-width: 1800px){
+    .creatorCardContainer{
+        .creatorCard{
+            .creatorCardAvatarBackground{
+                width: 26rem;
+            }
+        }
+    }
+}
+
+
+@media(min-width: 1201px) and (max-width: 1500px){
+    .creatorCardContainer{
+        .cardList{
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .creatorCard{
+            margin: 0;
+            left:0;
+            width: 25rem;
+            height: 20rem;
+            margin-bottom: 5rem;
+            .creatorCardAvatarBackground{
+                width: 27rem;
+            }
+        }
+    }
+}
+
+@media (max-width: 1200px){
+    .creatorCardContainer{
+        .cardList{
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .creatorCard{
+            margin: 0;
+            width: 25rem;
+            height: 20rem;
+            margin-bottom: 5rem;
+            .creatorCardAvatarBackground{
+                width: 27rem;
+            }
+        }
+        h2{
+            text-align: center;
+        }
+    }
+    
+}

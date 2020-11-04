@@ -1,26 +1,28 @@
 import React,{useEffect} from 'react'
-import Navbar from '../../Components/Navbar'
-import rawgService from '../../Services/rawgApi'
-import { useDispatch,useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import {
-  setAccToken,
-  setInitGames,
-  setSelectedGames,
+  initGamesAsync,
+  initCreatorsAsync
 } from '../../Slices/gamesSlice';
-
+import Slider from '../../Components/Slider';
+import CreatorCard from '../../Components/CreatorCard';
+import './home.scss'
+import Navbar from '../../Components/Navbar';
 
 export default function Home() {
     const dispatch = useDispatch();
-    const acc_token= useSelector(state=>state.games.accToken);
-    const rawg= new rawgService();
+    //const initGames= useSelector(state=>state.games.initGames);
     useEffect(() => {
-       rawg.initGames();
-        
+       dispatch(initGamesAsync());
+       dispatch(initCreatorsAsync());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
-
+    
     return (
-        <div>
+        <div className="homeContainer">
             <Navbar/>
+            <Slider/>
+            <CreatorCard/>
         </div>
     )
 }

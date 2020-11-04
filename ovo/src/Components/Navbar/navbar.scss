@@ -1,0 +1,12 @@
+.navbarContainer{
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    width: 100%;
+    z-index: 100;
+    h1{
+        color: rgb(102, 181, 255);
+        font-size: 2rem;
+        padding: 1rem;
+    }
+}

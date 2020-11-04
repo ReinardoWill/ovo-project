@@ -1,9 +1,10 @@
 import React from 'react'
-
+import './navbar.scss'
 export default function Navbar() {
     return (
-        <div>
-            
+        <div className="navbarContainer">
+            <h1>GamesDBProject</h1>
+            <div>ini search</div>
         </div>
     )
 }
