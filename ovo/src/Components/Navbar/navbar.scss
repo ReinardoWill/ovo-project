@@ -2,11 +2,99 @@
     display: flex;
     justify-content: space-between;
     position: absolute;
+    overflow: hidden;
     width: 100%;
     z-index: 100;
     h1{
         color: rgb(102, 181, 255);
         font-size: 2rem;
         padding: 1rem;
+    }
+    .navbarSearchContainer{
+        padding: 1rem;
+        input {
+	        outline: none;
+        }
+        input[type=search] {
+            -webkit-appearance: textfield;
+            -webkit-box-sizing: content-box;
+            font-family: inherit;
+            font-size: 100%;
+            border: solid 1px #ccc;
+            
+            -webkit-border-radius: 10em;
+            -moz-border-radius: 10em;
+            border-radius: 10em;
+            
+            -webkit-transition: all .5s;
+            -moz-transition: all .5s;
+            transition: all .5s;
+            background: #d3eefd url(https://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat 9px center;
+            width: 15px;
+            padding-left: 0.2rem;
+            padding-right: 1rem;
+            color: transparent;
+            cursor: pointer;
+            &::-webkit-search-decoration,
+            &::-webkit-search-cancel-button {
+                display: none; 
+            }
+        }
+        input[type=search]:hover {
+            background-color: #f3ffff;
+        }
+        input[type=search]:focus {
+            width: 20rem;
+            padding-left: 2rem;
+            color: #000;
+            background-color: #d3eefd;
+            cursor: auto;
+            &:-moz-placeholder {
+                color: black;
+            }
+            &::-webkit-input-placeholder {
+                color: black;
+            }
+        }
+        input:-moz-placeholder {
+            color: transparent;
+        }
+        input::-webkit-input-placeholder {
+            color: transparent;
+        }
+    }
+    
+
+}
+
+@media(max-width: 700px){
+    .navbarContainer{
+        .navbarSearchContainer{
+            input[type=search]:focus {
+                position: absolute;
+                left:55%;
+                width: 11.5rem;
+            }
+        }
+    }
+}
+
+@media(max-width: 500px){
+    .navbarContainer{
+        flex-direction: column;
+        .navbarSearchContainer{
+            input[type=search]{
+                position: relative;
+                top: 10%;
+                left:0;
+            }
+            
+            input[type=search]:focus {
+                position: relative;
+                top: 20%;
+                left:0;
+                width: 12rem;
+            }
+        }
     }
 }

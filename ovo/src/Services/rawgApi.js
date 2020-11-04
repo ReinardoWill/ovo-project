@@ -7,7 +7,7 @@ const API_URL = `https://api.rawg.io/api`;
 export default class rawgService{
     initGames = ()=>{
         return axios
-	        .get(`${API_URL}/games?key=${key}&page=${Math.floor(Math.random() * 11)+1}`)
+	        .get(`${API_URL}/games?key=${key}&page=${Math.floor(Math.random() * 11)+1}&page_size=10`)
 	        .then(response => {
                 console.log(response.data)
 	            return response.data;

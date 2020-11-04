@@ -4,7 +4,9 @@ export default function Navbar() {
     return (
         <div className="navbarContainer">
             <h1>GamesDBProject</h1>
-            <div>ini search</div>
+            <div className="navbarSearchContainer">
+                <input type="search" placeholder="Search Games,Creators"/>
+            </div>
         </div>
     )
 }
