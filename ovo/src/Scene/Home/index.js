@@ -1,5 +1,5 @@
 import React,{useEffect} from 'react'
-import { useDispatch,useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import {
   HashRouter as Router,
   Switch,
@@ -17,9 +17,7 @@ import Navbar from '../../Components/Navbar';
 
 export default function Home() {
     const dispatch = useDispatch();
-    const selectedGames= useSelector(state=>state.games.selectedGames);
     useEffect(() => {
-        selectedGames=[];
         dispatch(initGamesAsync());
         dispatch(initCreatorsAsync());
     // eslint-disable-next-line react-hooks/exhaustive-deps
