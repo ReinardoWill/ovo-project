@@ -1,11 +1,26 @@
 import React from 'react'
 import './creatorcard.scss'
-import { useSelector } from 'react-redux'
+import { useSelector,useDispatch } from 'react-redux'
+import { setSelectedCreatorsAsync}  from '../../Slices/gamesSlice';
+import { useHistory } from 'react-router-dom';
 
 export default function CreatorCard() {
     const initCreators= useSelector(state=>state.games.initCreators);
+    const dispatch = useDispatch();
+    const history = useHistory();
+    const handleClickDetail= (id)=>{
+        dispatch(setSelectedCreatorsAsync(id));
+        history.push(
+            {
+                pathname: '/detail',
+                data: {
+                    type:'Creator'
+                }
+            }
+        )
+    }
     return (
-        <div className="creatorCardContainer">
+        <div className="creatorCardContainer" >
             <h2>Top Creator</h2>
             <div className="cardList">
                 {initCreators.hasOwnProperty('count') && 
@@ -14,7 +29,7 @@ export default function CreatorCard() {
                             backgroundImage: 'url(' + creator.image_background + ')',
                         };
                         return(
-                            <div className="creatorCard" key={creator.id}>
+                            <div className="creatorCard" key={creator.id} onClick={()=>handleClickDetail(creator.id)}>
                                 <div className="creatorCardAvatarBackground" style={backgroundStyling}>
                                 </div>
                                 <div className="creatorCardAvatarContainer">

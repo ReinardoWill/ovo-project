@@ -15,7 +15,11 @@ export const gamesSlice = createSlice({
         state.initGames = action.payload;
     },
     setSelectedGames: (state, action) => {
+        console.log(action.payload)
         state.selectedGames = action.payload;
+    },
+    resetSelectedGames: (state, action) => {
+        state.selectedGames = [];
     },
     setInitCreators: (state, action) => {
         state.initCreators = action.payload;
@@ -26,7 +30,7 @@ export const gamesSlice = createSlice({
   },
 });
 
-export const { setInitGames,setSelectedGames,setInitCreators,setSelectedCreators } = gamesSlice.actions;
+export const { setInitGames,setSelectedGames,resetSelectedGames,setInitCreators,setSelectedCreators } = gamesSlice.actions;
 
 // The function below is called a thunk and allows us to perform async logic. It
 // can be dispatched like a regular action: `dispatch(incrementAsync(10))`. This
@@ -40,8 +44,12 @@ export const initGamesAsync = () => dispatch => {
     });
     
 };
-export const selectedGamesAsync = game => dispatch => {
-    dispatch(setSelectedGames(game));
+export const selectedGamesAsync = query => dispatch => {
+    rawg.searchGames(query).then((data) => {
+        dispatch(setSelectedGames(data));
+    }).catch((err) => {
+        console.log(err)
+    });
 };
 
 export const initCreatorsAsync = () => dispatch => {
@@ -52,8 +60,12 @@ export const initCreatorsAsync = () => dispatch => {
     });
     
 };
-export const setSelectedCreatorsAsync = creator => dispatch => {
-    dispatch(setSelectedCreators(creator));
+export const setSelectedCreatorsAsync = query => dispatch => {
+    rawg.searchCreator(query).then((data) => {
+        dispatch(setSelectedCreators(data));
+    }).catch((err) => {
+        console.log(err)
+    });
 };
 
 

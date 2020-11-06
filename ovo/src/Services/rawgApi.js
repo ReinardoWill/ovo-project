@@ -12,10 +12,13 @@ export default class rawgService{
 	            return response.data;
 	    });
     }
-    searchGames = (query,size)=>{
+    searchGames = (query)=>{
         return axios
-	        .get(`${API_URL}/games?key=${key}&query=${query}&page_size=${size}`)
+	        .get(`${API_URL}/games/${query}?key=${key}`)
 	        .then(response => {
+                sessionStorage.setItem('type','Game');
+                sessionStorage.setItem('search',JSON.stringify(response.data));
+                console.log(response.data)
 	            return response.data;
 	    });
     }
@@ -23,6 +26,16 @@ export default class rawgService{
         return axios
 	        .get(`${API_URL}/creators?key=${key}&page=${Math.floor(Math.random() * 11)+1}&page_size=3`)
 	        .then(response => {
+	            return response.data;
+	    });
+    }
+    searchCreator = (query)=>{
+        return axios
+	        .get(`${API_URL}/creators/${query}?key=${key}`)
+	        .then(response => {
+                sessionStorage.setItem('type','Creator');
+                sessionStorage.setItem('search',JSON.stringify(response.data));
+                console.log(response.data)
 	            return response.data;
 	    });
     }
