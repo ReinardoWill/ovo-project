@@ -9,7 +9,13 @@ export default class rawgService{
         return axios
 	        .get(`${API_URL}/games?key=${key}&page=${Math.floor(Math.random() * 11)+1}&page_size=10`)
 	        .then(response => {
-                console.log(response.data)
+	            return response.data;
+	    });
+    }
+    searchGames = (query,size)=>{
+        return axios
+	        .get(`${API_URL}/games?key=${key}&query=${query}&page_size=${size}`)
+	        .then(response => {
 	            return response.data;
 	    });
     }

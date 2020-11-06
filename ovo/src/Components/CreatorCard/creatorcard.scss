@@ -4,20 +4,21 @@
     justify-content: center;
     align-content: center;
     padding: 1rem;
-
+    transition: .5s ease-in;
     h2{
         font-size: 200%;
         line-height: 1em;
         padding-bottom: 2rem;
     }
-
     .cardList{
         display: flex;
+        flex-direction: row;
         justify-content: center;
     }
     .creatorCard{
         display: flex;
         position: relative;
+        cursor: pointer;
         flex-direction: column;
         border-radius: 50px;
         background: #d3eefd;
@@ -25,29 +26,35 @@
              -20px 20px 60px #f3ffff;
         width: 30rem;
         height: 20rem;
-        padding: 1.5rem;
-        margin-left:5rem;
+        padding: 2.5rem;
+        margin-left:3rem;
+        overflow: hidden;
         .creatorCardName{
             display: flex;
             align-items: center;
             justify-content: center;
-            color: rgb(255, 255, 255);
+            mix-blend-mode: multiply;
+            -webkit-text-fill-color: white;
+            -webkit-text-stroke-width: 2.5px;
+            -webkit-text-stroke-color: black;
+            font-weight:1000;
+            color: transparent;
             z-index: 2;
         }
         .creatorCardAvatarBackground{
             position: absolute;
-            bottom:35%;
-            right:0.2%;
             background-size: cover;
-            width: 100%;
-            height: 15rem;
+            margin-top: -20%;
+            margin-left: -20%;
+            width: 150%;
+            height: 15.5rem;
             background-clip: border-box;
-            -webkit-filter: blur(2px);
-                    filter: blur(2px);
             background-position: top center;
             border-radius: inherit;
             opacity: .8;
+            mix-blend-mode: darken;
             box-shadow: inset 0px 0px 15px 15px #d3eefd;
+            overflow: hidden;
 
         }
         .creatorCardAvatarContainer{
@@ -62,7 +69,7 @@
                 width: 8.5rem;
                 height: 8.5rem;
                 border-radius: 50%;
-                object-fit: fill;
+                object-fit: cover;
                 padding: 0.5rem;
                 
             }
@@ -79,18 +86,7 @@
     }
 }
 
-@media(min-width: 1500px) and (max-width: 1800px){
-    .creatorCardContainer{
-        .creatorCard{
-            .creatorCardAvatarBackground{
-                width: 26rem;
-            }
-        }
-    }
-}
-
-
-@media(min-width: 1201px) and (max-width: 1500px){
+@media only screen and (max-width: 576px) {
     .creatorCardContainer{
         .cardList{
             flex-direction: column;
@@ -99,55 +95,68 @@
         }
         .creatorCard{
             margin: 0;
-            left:0;
-            width: 25rem;
-            height: 20rem;
+            width: 80%;
+            height: 40%;
             margin-bottom: 5rem;
-            .creatorCardAvatarBackground{
-                width: 27rem;
-            }
-        }
-    }
-}
-
-@media (max-width: 1200px){
-    .creatorCardContainer{
-        .cardList{
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-        .creatorCard{
-            margin: 0;
-            width: 25rem;
-            height: 20rem;
-            margin-bottom: 5rem;
-            .creatorCardAvatarBackground{
-                width: 27rem;
-            }
         }
         h2{
-            text-align: center;
+            font-size: 150%;
+        }
+        h4{
+            font-size: 100%;
+        }
+    }
+}
+
+@media only screen and (min-width: 576px) {
+    .creatorCardContainer{
+        .cardList{
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .creatorCard{
+            margin-bottom: 5rem;
+        }
+        h2{
+            font-size: 150%;
+        }
+        h4{
+            font-size: 100%;
+        }
+    }
+}
+
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    .creatorCardContainer{
+        .cardList{
+            flex-direction: row;
+        }
+        img{
+            background-position: top center;        
+        }
+        h2{
+            font-size: 150%;
+        }
+        h4{
+            font-size: 100%;
+        }
+    }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    .creatorCardContainer{
+        .cardList{
+            flex-direction: row;
+        }
+        img{
+            background-position: top center;        
         }
     }
     
 }
 
 
-@media(max-width: 500px){
-    .creatorCardContainer{
-        overflow: hidden;
-        .creatorCard{
-            margin: 0;
-            width: 20rem;
-            height: 20rem;
-            margin-bottom: 6rem;
-            .creatorCardAvatarBackground{
-                width: 24rem;
-            }
-        }
-        h2{
-            text-align: center;
-        }
-    }
-}
