@@ -22,6 +22,13 @@ export default class rawgService{
 	            return response.data;
 	    });
     }
+    searchGamesScreenshots = (query)=>{
+        return axios
+	        .get(`${API_URL}/games/${query}/screenshots?key=${key}`)
+	        .then(response => {
+	            return response.data;
+	    });
+    }
     initCreator = ()=>{
         return axios
 	        .get(`${API_URL}/creators?key=${key}&page=${Math.floor(Math.random() * 11)+1}&page_size=3`)
@@ -35,6 +42,27 @@ export default class rawgService{
 	        .then(response => {
                 sessionStorage.setItem('type','Creator');
                 sessionStorage.setItem('search',JSON.stringify(response.data));
+                console.log(response.data)
+	            return response.data;
+	    });
+    }
+
+    searchGamesByQuery = (query)=>{
+        return axios
+	        .get(`${API_URL}/games?key=${key}&search=${query}`)
+	        .then(response => {
+                sessionStorage.setItem('type','All');
+                sessionStorage.setItem('search_games',JSON.stringify(response.data));
+                console.log(response.data)
+	            return response.data;
+	    });
+    }
+    searchCreatorByQuery = (query)=>{
+        return axios
+	        .get(`${API_URL}/creators?key=${key}&search=${query}`)
+	        .then(response => {
+                sessionStorage.setItem('type','All');
+                sessionStorage.setItem('search_creators',JSON.stringify(response.data));
                 console.log(response.data)
 	            return response.data;
 	    });

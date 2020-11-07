@@ -6,6 +6,7 @@ import {
   Route 
 } from "react-router-dom";
 import Detail from './Scene/Detail';
+import Search from './Scene/Search';
 
 export default function App() {
   return (
@@ -17,6 +18,9 @@ export default function App() {
                 </Route>
                 <Route path="/detail">
                     <Detail/>
+                </Route>
+                <Route path="/search">
+                    <Search/>
                 </Route>
             </Switch>
         </Router>

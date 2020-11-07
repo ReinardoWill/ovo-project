@@ -15,7 +15,6 @@ export const gamesSlice = createSlice({
         state.initGames = action.payload;
     },
     setSelectedGames: (state, action) => {
-        console.log(action.payload)
         state.selectedGames = action.payload;
     },
     resetSelectedGames: (state, action) => {
@@ -68,7 +67,18 @@ export const setSelectedCreatorsAsync = query => dispatch => {
     });
 };
 
-
+export const queryGamesCreatorsAsync = query => dispatch => {
+    rawg.searchGamesByQuery(query).then((data) => {
+        dispatch(setSelectedGames(data));
+        rawg.searchCreatorByQuery(query).then((data) => {
+            dispatch(setSelectedCreators(data));
+        }).catch((err) => {
+            console.log(err);
+        });
+    }).catch((err) => {
+        console.log(err)
+    });
+};
 
 
 export default gamesSlice.reducer;
