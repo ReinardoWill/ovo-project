@@ -15,12 +15,15 @@ export default function DetailGame() {
     const rawg= new rawgService();
     const slidesRef=useRef(null);
     useEffect(() => {
-        if(!game.name){
-            // eslint-disable-next-line no-const-assign
-            // eslint-disable-next-line react-hooks/exhaustive-deps
-            const data=JSON.parse(sessionStorage.getItem('search'));
-            dispatch(setSelectedGames(data))
+        if(game!=null){
+            if(!game.name){
+                // eslint-disable-next-line no-const-assign
+                // eslint-disable-next-line react-hooks/exhaustive-deps
+                const data=JSON.parse(sessionStorage.getItem('search'));
+                dispatch(setSelectedGames(data))
+            }
         }
+        
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 

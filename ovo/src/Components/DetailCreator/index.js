@@ -8,12 +8,15 @@ export default function DetailCreator() {
     const creator = useSelector(state=>state.games.selectedCreators);
     const dispatch = useDispatch();
     useEffect(() => {
-        if(!creator.name){
-            // eslint-disable-next-line no-const-assign
-            // eslint-disable-next-line react-hooks/exhaustive-deps
-            const data=JSON.parse(sessionStorage.getItem('search'));
-            dispatch(setSelectedCreators(data))
+        if(creator!=null){
+            if(!creator.name){
+                // eslint-disable-next-line no-const-assign
+                // eslint-disable-next-line react-hooks/exhaustive-deps
+                const data=JSON.parse(sessionStorage.getItem('search'));
+                dispatch(setSelectedCreators(data))
+            }
         }
+        
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     return (

@@ -18,7 +18,6 @@ export default class rawgService{
 	        .then(response => {
                 sessionStorage.setItem('type','Game');
                 sessionStorage.setItem('search',JSON.stringify(response.data));
-                console.log(response.data)
 	            return response.data;
 	    });
     }
@@ -42,7 +41,6 @@ export default class rawgService{
 	        .then(response => {
                 sessionStorage.setItem('type','Creator');
                 sessionStorage.setItem('search',JSON.stringify(response.data));
-                console.log(response.data)
 	            return response.data;
 	    });
     }
@@ -52,9 +50,8 @@ export default class rawgService{
 	        .get(`${API_URL}/games?key=${key}&search=${query}`)
 	        .then(response => {
                 sessionStorage.setItem('type','All');
-                sessionStorage.setItem('search_games',JSON.stringify(response.data));
-                console.log(response.data)
-	            return response.data;
+                sessionStorage.setItem('search_games',JSON.stringify(response.data.results));
+	            return response.data.results;
 	    });
     }
     searchCreatorByQuery = (query)=>{
@@ -62,9 +59,8 @@ export default class rawgService{
 	        .get(`${API_URL}/creators?key=${key}&search=${query}`)
 	        .then(response => {
                 sessionStorage.setItem('type','All');
-                sessionStorage.setItem('search_creators',JSON.stringify(response.data));
-                console.log(response.data)
-	            return response.data;
+                sessionStorage.setItem('search_creators',JSON.stringify(response.data.results));
+	            return response.data.results;
 	    });
     }
 }

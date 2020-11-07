@@ -1,0 +1,50 @@
+.tabContainer{
+    display: flex;
+    flex-direction: column;
+    margin: 1rem;
+    margin-top:7vh;
+    width: 100%;
+    .tabBtn {
+        margin-top:3vh;
+        display: flex;
+        width: 100%;
+        height: 100%;
+        border: none;
+        button{
+            width: 100%;
+            height: 100%;
+            font-size: 3.5rem;
+            background-color: transparent;
+            border: none;
+            margin-left: .5rem;
+            transition: .5s;
+            outline:0;
+            &:hover {
+                background-color: rgba(255, 255, 255,.5);
+            }
+            &:active {
+                outline:0;
+            }
+
+            &:focus {
+                outline:0;
+            }
+            &.active{
+                background-color: rgba(180, 180, 180, 0.25);
+                border: 1px solid rgba(0, 0, 0, 0); 
+            }
+        }
+        
+    }
+    .tabContentContainer{
+        .tabContent{
+            display: flex;
+            margin: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+    }
+}
+

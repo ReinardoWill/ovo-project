@@ -11,6 +11,7 @@ export default function Navbar() {
     const dispatch = useDispatch();
     const handleSubmit= (event)=>{
         event.preventDefault();
+        sessionStorage.clear();
         let searching=searchRef.current;
         if(searching.value && searching.value!==''){
             dispatch(queryGamesCreatorsAsync(searching.value))
