@@ -23,7 +23,7 @@ export default function SearchGameCard(Game) {
         )
     }
     return (
-        <div className="searchGameCardContainer" onClick={()=>handleClickDetail(currGame.id)}>
+        <div className="searchGameCardContainer"  onClick={()=>handleClickDetail(currGame.id)}>
             <div className="searchGameCardBackground" style={
                 {
                     backgroundImage: 'url(' + currGame.background_image + ')'

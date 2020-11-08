@@ -33,3 +33,11 @@
         margin-top: 20vh
     }
 }
+
+
+@media only screen and (max-width: 992px) {
+    .searchGameCardContainer{
+        width: 50%;
+        height: 30vh;
+    }
+}

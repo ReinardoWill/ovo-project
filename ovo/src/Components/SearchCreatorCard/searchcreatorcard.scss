@@ -1,0 +1,57 @@
+.searchCreatorCardContainer{
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    width: 20%;
+    height: 30vh;
+    border-radius: 50px;
+    background: #d3eefd;
+    box-shadow:  20px -20px 60px #b3cad7, 
+                -20px 20px 60px #f3ffff;
+    margin-top:0.5rem;
+    margin-left:3rem;
+    margin-bottom:2rem;
+    overflow: hidden;
+    cursor: pointer;
+    .searchCreatorCardBackground{
+        position: absolute;
+        background-size: cover;
+        background-clip: border-box;
+        background-position: top center;
+        mix-blend-mode: darken;
+        border-radius: inherit;
+        margin-top: -10%;
+        margin-left: -20%;
+        box-shadow: inset 0px 0px 15px 15px #d3eefd;
+        width: 150%;
+        height: 12rem;
+        overflow: hidden;
+    }
+    .searchCreatorCardAvatarContainer{
+        display: flex;
+        align-items: center;
+        justify-content: center; 
+        z-index:2;
+        img{
+            width: 10rem;
+            height: 10rem;
+            object-fit: cover;
+            border-radius: 50%;
+            padding: 0.5rem;
+        }
+    }
+    h2{
+        margin: 1.5rem;
+        font-size: 1.5rem;
+        margin-top: 5vh;
+        z-index:2;
+    }
+}
+
+
+@media only screen and (max-width: 992px) {
+    .searchCreatorCardContainer{
+        width: 50%;
+        height: 30vh;
+    }
+}

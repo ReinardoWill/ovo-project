@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import rawgService from '../Services/rawgApi'
+import rawgService from '../Services/rawgApi';
 
 const rawg= new rawgService();
 export const gamesSlice = createSlice({
@@ -9,6 +9,8 @@ export const gamesSlice = createSlice({
     selectedGames:[],
     initCreators :[],
     selectedCreators:[],
+    hasMoreGamesUrl:null,
+    hasMoreCreatorsUrl:null
   },
   reducers: {
     setInitGames: (state, action) => {
@@ -25,11 +27,17 @@ export const gamesSlice = createSlice({
     },
     setSelectedCreators: (state, action) => {
         state.selectedCreators = action.payload;
-    }
+    },
+    setHasMoreGamesUrl: (state, action) => {
+        state.hasMoreGamesUrl = action.payload;
+    },
+    setHasMoreCreatorsUrl: (state, action) => {
+        state.hasMoreCreatorsUrl = action.payload;
+    },
   },
 });
 
-export const { setInitGames,setSelectedGames,resetSelectedGames,setInitCreators,setSelectedCreators } = gamesSlice.actions;
+export const { setInitGames,setSelectedGames,resetSelectedGames,setInitCreators,setSelectedCreators,setHasMoreGamesUrl,setHasMoreCreatorsUrl } = gamesSlice.actions;
 
 // The function below is called a thunk and allows us to perform async logic. It
 // can be dispatched like a regular action: `dispatch(incrementAsync(10))`. This
@@ -69,9 +77,11 @@ export const setSelectedCreatorsAsync = query => dispatch => {
 
 export const queryGamesCreatorsAsync = query => dispatch => {
     rawg.searchGamesByQuery(query).then((data) => {
-        dispatch(setSelectedGames(data));
+        dispatch(setSelectedGames(data.data));
+        dispatch(setHasMoreGamesUrl(data.hasMore));
         rawg.searchCreatorByQuery(query).then((data) => {
-            dispatch(setSelectedCreators(data));
+            dispatch(setSelectedCreators(data.data));
+            dispatch(setHasMoreCreatorsUrl(data.hasMore));
         }).catch((err) => {
             console.log(err);
         });
@@ -79,6 +89,8 @@ export const queryGamesCreatorsAsync = query => dispatch => {
         console.log(err)
     });
 };
+
+
 
 
 export default gamesSlice.reducer;

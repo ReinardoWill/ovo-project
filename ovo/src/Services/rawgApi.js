@@ -51,7 +51,20 @@ export default class rawgService{
 	        .then(response => {
                 sessionStorage.setItem('type','All');
                 sessionStorage.setItem('search_games',JSON.stringify(response.data.results));
-	            return response.data.results;
+                if(response.data.next && response.data.next!=null){
+                    sessionStorage.setItem('hasMore_games',JSON.stringify(response.data.next));
+                    return {
+                        data:response.data.results,
+                        hasMore:response.data.next
+                    };
+                }
+                else{
+                    sessionStorage.setItem('hasMore_games',JSON.stringify('null'));
+                    return {
+                        data:response.data.results,
+                        hasMore:null
+                    };
+                }
 	    });
     }
     searchCreatorByQuery = (query)=>{
@@ -60,7 +73,56 @@ export default class rawgService{
 	        .then(response => {
                 sessionStorage.setItem('type','All');
                 sessionStorage.setItem('search_creators',JSON.stringify(response.data.results));
-	            return response.data.results;
+                if(response.data.next && response.data.next!=null){
+                    sessionStorage.setItem('hasMore_creator',JSON.stringify(response.data.next));
+                    return {
+                        data:response.data.results,
+                        hasMore:response.data.next
+                    };
+                }
+                else{
+                    sessionStorage.setItem('hasMore_creator',JSON.stringify('null'));
+                    return {
+                        data:response.data.results,
+                        hasMore:null
+                    };
+                }
+                
+	    });
+    }
+    searchNext = (next,type)=>{
+        return axios
+	        .get(next)
+	        .then(response => {
+                console.log(response.data)
+                sessionStorage.setItem('type','All');
+                if(type==='Game'){
+                    let currData= JSON.parse(sessionStorage.getItem('search_games'));
+                    response.data.results.map(result=>{
+                        return sessionStorage.setItem('search_games',JSON.stringify([...currData,result]));
+                    })
+                    if(response.data.next && response.data.next!=null){
+                        sessionStorage.setItem('hasMore_games',JSON.stringify(response.data.next));
+                        return {
+                            data:response.data.results,
+                            hasMore:response.data.next
+                        };
+                    }
+                }
+                else{
+                    let currData= JSON.parse(sessionStorage.getItem('search_creators'));
+                    response.data.results.map(result=>{
+                        return sessionStorage.setItem('search_creators',JSON.stringify([...currData,result]));
+                    })
+                    if(response.data.next && response.data.next!=null){
+                        sessionStorage.setItem('hasMore_creator',JSON.stringify(response.data.next));
+                        return {
+                            data:response.data.results,
+                            hasMore:response.data.next
+                        };
+                    }
+                }
+                
 	    });
     }
 }
