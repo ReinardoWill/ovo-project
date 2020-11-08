@@ -22,12 +22,9 @@ export default function Tab() {
     const hasMoreCreatorsUrl=useSelector(state=>state.games.hasMoreCreatorsUrl);
     const dispatch = useDispatch();
     const history = useHistory();
-    const gameObs= useRef();
     const searchNext= (next,type) =>{
-        setLoading(true)
         rawg.searchNext(next,type).then((result) => {
             if(type==='Game'){
-                console.log(result.data)
                 dispatch(setSelectedGames([...games,...result.data]))
                 let currData= JSON.parse(sessionStorage.getItem('search_games'));
                 sessionStorage.setItem('search_games',JSON.stringify([...currData,...result.data]));
@@ -35,16 +32,20 @@ export default function Tab() {
                 setLoading(false)
             }
             else{
-                dispatch(setSelectedCreators([...creators,result.data]))
+                dispatch(setSelectedCreators([...creators,...result.data]))
                 let currData= JSON.parse(sessionStorage.getItem('search_creators'));
                 sessionStorage.setItem('search_creators',JSON.stringify([...currData,...result.data]));
                 dispatch(setHasMoreCreatorsUrl(result.hasMore));
                 setLoading(false)
             }
         }).catch((err) => {
+            /* console.log(hasMoreGamesUrl)
+            console.log(hasMoreCreatorsUrl) */
             console.log(err)
+            setLoading(false)
         });
     };
+    const gameObs= useRef();
     const lastGameRef = useCallback(node=>{
         if(loading){ 
             return
@@ -55,9 +56,8 @@ export default function Tab() {
             }
             gameObs.current = new IntersectionObserver(entries=>{
                 if(entries[0].isIntersecting && hasMoreGamesUrl && hasMoreGamesUrl!=null && hasMoreGamesUrl!=='null' ){
-                    (async () => {
-                        let func1= await searchNext(hasMoreGamesUrl,'Game')
-                    })();
+                    setLoading(true)
+                    searchNext(hasMoreGamesUrl,'Game')
                 }
             })
             if(node){
@@ -67,6 +67,28 @@ export default function Tab() {
         
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[loading,hasMoreGamesUrl])
+
+    const creatorObs= useRef();
+    const lastCreatorRef = useCallback(node=>{
+        if(loading){ 
+            return
+        }
+        else{
+            if(creatorObs.current){
+                creatorObs.current.disconnect();
+            }
+            creatorObs.current = new IntersectionObserver(entries=>{
+                if(entries[0].isIntersecting && hasMoreCreatorsUrl && hasMoreCreatorsUrl!=null && hasMoreCreatorsUrl!=='null' ){
+                    searchNext(hasMoreCreatorsUrl,'Creator')
+                }
+            })
+            if(node){
+                creatorObs.current.observe(node)
+            }
+        }
+        
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[loading,hasMoreCreatorsUrl])
 
 
     useEffect(() => {
@@ -80,7 +102,6 @@ export default function Tab() {
                 // eslint-disable-next-line no-const-assign
                 // eslint-disable-next-line react-hooks/exhaustive-deps
                 data_games=JSON.parse(sessionStorage.getItem('search_games'));
-                console.log(JSON.stringify(data_games));
                 hasMore_games=JSON.parse(sessionStorage.getItem('hasMore_games'));
                 dispatch(setSelectedGames([]))
                 dispatch(setSelectedGames(data_games))
@@ -146,9 +167,28 @@ export default function Tab() {
                     })}
                 </div>
                 <div className="tabContent">
-                    {creators!=null && Array.isArray(creators) && creators.map(creator=>
-                        <SearchCreatorCard Creator={creator} key={creator.id}/>
-                    )}
+                    {creators!=null && Array.isArray(creators) && creators.map((creator,i)=>{
+                        if(i===creators.length-1){
+                            return(
+                                <React.Fragment key={creator.id}>
+                                    <div ref={lastCreatorRef}></div>
+                                    <SearchCreatorCard Creator={creator} />
+                                </React.Fragment>
+                            )
+                            
+                            
+                        }
+                        else{
+                            return(
+                                <React.Fragment key={creator.id}>
+                                    <div></div>
+                                    <SearchCreatorCard Creator={creator}/>
+                                </React.Fragment>
+                            )
+                            
+                        }
+                        
+                    })}
                 </div>
             </div>
             
